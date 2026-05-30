@@ -38,8 +38,11 @@
     lazydocker
     lazysql
     qbittorrent
-    opentofu
-    terraform-ls
+    eog
+
+    talosctl
+    kubectl
+    k9s
   ];
 
   xdg.dataFile = {

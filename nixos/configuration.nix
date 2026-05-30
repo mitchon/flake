@@ -100,15 +100,17 @@
     v2rayn
     sing-box
   ];
-
-  networking.firewall.allowedUDPPorts = [ 53 ];
-  # networking.networkmanager.dns = "none";
-  # networking.networkmanager.appendNameservers = [ "1.1.1.1" "8.8.8.8" ];
   
   fonts.packages = with pkgs; [
     noto-fonts
     nerd-fonts.fira-code
   ];
+
+  # networking.wg-quick.interfaces = {
+  #   wg0 = {
+  #     configFile = "/home/${user}/wg0.conf";
+  #   };
+  # };
 
   system.stateVersion = stateVersion;
 
