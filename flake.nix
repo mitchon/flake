@@ -7,10 +7,12 @@
     };
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell";
-      # url = "github:notiant/noctalia-shell/patch-1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    self.submodules = true;
+    zen-browser = {
+      url = "github:youwen5/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -25,40 +27,38 @@
       stateVersion = "25.11";
       user = "mitchanx";
       hostname = "think-nix";
-      pkgs = nixpkgs.legacyPackages.${system};
     in
     {
       nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {
         system = system;
         specialArgs = { inherit inputs stateVersion hostname user; };
         modules = [
-          ./nixos/configuration.nix
-          ./noctalia.nix
+          ./hosts/${hostname}/nixos/configuration.nix
         ];
       };
 
       homeConfigurations."${user}@${hostname}" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.${system};
         extraSpecialArgs = { inherit inputs self stateVersion hostname user; };
-        modules = [ ./home-manager/home.nix ];
+        modules = [ ./hosts/${hostname}/home-manager/home.nix ];
       };
 
-      devShells.${system}.default = pkgs.mkShell {
-        nativeBuildInputs = with pkgs; [
-          corretto21
-          gradle
-          maven
-          jetbrains.idea
+      # devShells.${system}.default = pkgs.mkShell {
+      #   nativeBuildInputs = with pkgs; [
+      #     corretto21
+      #     gradle
+      #     maven
+      #     jetbrains.idea
 
-          telepresence
-          k9s
+      #     telepresence
+      #     k9s
 
-          postman
-        ];
+      #     postman
+      #   ];
       
-        shellHook = ''
-          export JAVA_HOME=${pkgs.corretto21}
-        '';
-      };
+      #   shellHook = ''
+      #     export JAVA_HOME=${pkgs.corretto21}
+      #   '';
+      # };
     };
 }

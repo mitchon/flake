@@ -4,5 +4,8 @@
     ./git.nix
     ./zed-editor.nix
     ./opentofu.nix
+    ./firefox.nix
+    ./neovim.nix
+    ./v2rayN.nix
   ];
 }

@@ -1,4 +1,4 @@
-{ self, pkgs, ... }:
+{ config, pkgs, ... }:
 {
   home.packages = with pkgs; [
     opentofu
@@ -7,7 +7,7 @@
   ];
 
   home.file.".tofurc" = {
-    source = self + /dotfiles/opentofu/.tofurc;
+    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/opentofu/.tofurc";
     recursive = true;
   };
 }
