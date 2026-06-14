@@ -1,8 +1,8 @@
-{
+{ user, ... }: {
   programs.git = {
     enable = true;
     settings.user = {
-      name = "mitchanx";
+      name = user;
       email = "kommital@yandex.ru";
     };
   };
