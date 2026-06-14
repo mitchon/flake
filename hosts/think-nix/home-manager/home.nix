@@ -29,6 +29,7 @@
     lazysql
     qbittorrent
     eog
+    libsixel
 
     talosctl
     kubectl

@@ -7,5 +7,7 @@
     ./firefox.nix
     ./neovim.nix
     ./v2rayN.nix
+    ./niri.nix
+    ./foot.nix
   ];
 }

@@ -16,7 +16,6 @@
     adwaita-icon-theme
     libnotify
     # xdg-desktop-portal-gnome
-    alacritty
     xwayland-satellite
     nautilus
   ];
