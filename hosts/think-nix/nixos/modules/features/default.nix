@@ -5,7 +5,7 @@
     ./sound.nix
     ./printing.nix
     ./docker.nix
-    # ./wireguard.nix
+    ./wireguard.nix
     ./gui
     ./programs.nix
     ./vpn.nix
