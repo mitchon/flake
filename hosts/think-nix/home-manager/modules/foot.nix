@@ -1,13 +1,11 @@
-{ pkgs, ...}:
+{ config, ...}:
 {
   programs.foot = {
     enable = true;
-    settings = {
-      main = {
-        dpi-aware = "yes";
-        font = "FiraCode Nerd Font:size=8";
-        term = "xterm-256color";
-      };
-    };
+  };
+
+  xdg.configFile."foot" = {
+    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/foot/.config/foot";
+    recursive = true;
   };
 }
