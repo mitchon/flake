@@ -6,6 +6,7 @@
     ./greeter.nix
     ./noctalia.nix
     ./i2c.nix
+    ./ssh-askpass.nix
   ];
   
   services.power-profiles-daemon.enable = true;
