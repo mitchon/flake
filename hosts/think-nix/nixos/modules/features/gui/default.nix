@@ -3,7 +3,7 @@
   imports = [
     ./niri.nix
     ./fonts.nix
-    ./greeter.nix
+    # ./greeter.nix
     ./noctalia.nix
     ./i2c.nix
     ./ssh-askpass.nix

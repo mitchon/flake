@@ -8,6 +8,7 @@
     ./neovim.nix
     ./v2rayN.nix
     ./niri.nix
+    ./noctalia.nix
     ./foot.nix
   ];
 }

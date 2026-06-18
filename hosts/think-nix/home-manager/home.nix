@@ -36,10 +36,4 @@
     k9s
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
-    
-  dconf.settings = {
-    "org/gnome/desktop/interface" = {
-      color-scheme = "prefer-dark";
-    };
-  };
 }
