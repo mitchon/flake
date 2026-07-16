@@ -15,6 +15,9 @@
     username = user;
     homeDirectory = "/home/${user}";
     stateVersion = stateVersion;
+    sessionVariables = {
+      JAVA_HOME = pkgs.corretto21;
+    };
   };
   
   home.packages = with pkgs; [
@@ -35,5 +38,22 @@
     kubectl
     k9s
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+
+    corretto21
+    gradle
+    maven
+
+    telepresence2
+    postman
+
+    libreoffice
+    hunspellDicts.en-gb-ise
+    hunspellDicts.en-us
+    hunspellDicts.ru-ru
+    zoom-us
+    claude-code
+
+    chromium
+    figma-linux
   ];
 }

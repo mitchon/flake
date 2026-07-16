@@ -6,6 +6,7 @@
     ./printing.nix
     ./docker.nix
     ./wireguard.nix
+    ./openvpn.nix
     ./gui
     ./programs.nix
     ./vpn.nix

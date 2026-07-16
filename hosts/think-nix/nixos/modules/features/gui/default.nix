@@ -7,6 +7,12 @@
     ./noctalia.nix
     ./i2c.nix
     ./ssh-askpass.nix
+    ./gaming.nix
+  ];
+
+  services.xserver.videoDrivers = [
+    "modesetting"
+    "nvidia"
   ];
   
   services.power-profiles-daemon.enable = true;

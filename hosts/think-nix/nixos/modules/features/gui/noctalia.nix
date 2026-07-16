@@ -5,7 +5,7 @@
   ];
   
   environment.systemPackages = [
-    pkgs.polkit_gnome
+    # pkgs.polkit_gnome
     inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
@@ -13,8 +13,6 @@
     enable = true;
     package = inputs.noctalia-greeter.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
-    # Optional configuration
-    greeter-args = "";
     settings = {
       cursor = {
         theme = "Adwaita";
@@ -24,5 +22,5 @@
     };
   };
 
-  security.polkit.enable = true;
+  # security.polkit.enable = true;
 }

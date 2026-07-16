@@ -10,5 +10,6 @@
     ./niri.nix
     ./noctalia.nix
     ./foot.nix
+    ./pinniped-cli.nix
   ];
 }

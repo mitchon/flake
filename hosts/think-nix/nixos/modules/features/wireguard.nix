@@ -1,9 +1,8 @@
-{ user, ... }:
 {
   networking.wg-quick.interfaces = {
     wg0 = {
       autostart = false;
-      configFile = "/home/${user}/wg0.conf";
+      configFile = "/etc/wireguard/wg0.conf";
     };
   };
 }
