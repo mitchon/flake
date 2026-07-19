@@ -10,6 +10,7 @@ the same locked nixpkgs revision.
 | --- | --- |
 | `nixosConfigurations.think-nix` | Workstation with its Home Manager configuration |
 | `homeConfigurations."mitchanx@think-nix"` | Optional standalone Home Manager activation |
+| `homeConfigurations.think-nix` | Short alias for the standalone Home Manager activation |
 | `nixosConfigurations.homelab` | Headless homelab server installed with disko |
 | `nixosConfigurations.nixos-bootstrap` | Configuration behind the bootstrap ISO |
 | `packages.x86_64-linux.iso` | Bootable bootstrap ISO |

@@ -51,6 +51,18 @@
           specialArgs = { inherit inputs hostname user; };
         };
 
+      thinkHome = home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs {
+          system = defaultSystem;
+          config.allowUnfree = true;
+        };
+        extraSpecialArgs = {
+          inherit inputs;
+          user = defaultUser;
+        };
+        modules = [ ./hosts/think-nix/home-manager/home.nix ];
+      };
+
       bootstrap = mkSystem {
         hostname = "nixos-bootstrap";
         modules = [ ./images/bootstrap.nix ];
@@ -88,16 +100,9 @@
         nixos-bootstrap = bootstrap;
       };
 
-      homeConfigurations."${defaultUser}@think-nix" = home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs {
-          system = defaultSystem;
-          config.allowUnfree = true;
-        };
-        extraSpecialArgs = {
-          inherit inputs;
-          user = defaultUser;
-        };
-        modules = [ ./hosts/think-nix/home-manager/home.nix ];
+      homeConfigurations = {
+        "${defaultUser}@think-nix" = thinkHome;
+        think-nix = thinkHome;
       };
 
       packages.${defaultSystem} = {
