@@ -1,8 +1,7 @@
 { pkgs, ... }:
+
 {
-  environment.systemPackages = with pkgs; [
-    openssh-askpass
-  ];
+  environment.systemPackages = [ pkgs.openssh-askpass ];
 
   programs.ssh = {
     enableAskPassword = true;

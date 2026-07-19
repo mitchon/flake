@@ -1,18 +1,13 @@
-{ stateVersion, pkgs, ... }:
+{ ... }:
 
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-      ./modules
-    ];
-
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  nixpkgs.config.allowUnfree = true; 
-
-  environment.systemPackages = with pkgs; [
-    home-manager
+  imports = [
+    ../../../profiles/workstation.nix
+    ./boot.nix
+    ./hardware-configuration.nix
   ];
 
-  system.stateVersion = stateVersion;
+  nixpkgs.config.allowUnfree = true;
+
+  system.stateVersion = "25.11";
 }

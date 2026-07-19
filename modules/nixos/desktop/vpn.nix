@@ -1,8 +1,9 @@
 { pkgs, ... }:
+
 {
   environment.systemPackages = with pkgs; [
-    v2rayn
     sing-box
+    v2rayn
   ];
 
   programs.throne = {

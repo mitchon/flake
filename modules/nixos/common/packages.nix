@@ -1,11 +1,10 @@
 { pkgs, ... }:
+
 {
   environment.systemPackages = with pkgs; [
+    curl
+    git
     vim
     wget
-    dnsutils
-    pciutils
   ];
-
-  programs.nix-ld.enable = true;
 }

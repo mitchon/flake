@@ -1,4 +1,5 @@
 { user, ... }:
+
 {
   users.users.${user} = {
     isNormalUser = true;

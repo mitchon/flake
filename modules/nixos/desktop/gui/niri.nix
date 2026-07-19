@@ -1,12 +1,14 @@
 { pkgs, ... }:
+
 {
   programs.niri.enable = true;
-  
-  services.libinput.enable = true;
-  services.dbus.enable = true;
-  #for nautilus
-  services.gvfs.enable = true;
-  services.udisks2.enable = true;
+
+  services = {
+    dbus.enable = true;
+    gvfs.enable = true;
+    libinput.enable = true;
+    udisks2.enable = true;
+  };
 
   xdg.portal = {
     enable = true;
@@ -18,13 +20,12 @@
 
   environment.systemPackages = with pkgs; [
     adwaita-icon-theme
-    libnotify
-    # xdg-desktop-portal-gnome
-    xwayland-satellite
-    nautilus
     file-roller
     libheif
     libheif.out
+    libnotify
+    nautilus
+    xwayland-satellite
   ];
 
   environment.pathsToLink = [ "share/thumbnailers" ];

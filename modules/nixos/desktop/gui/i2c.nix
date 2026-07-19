@@ -1,7 +1,12 @@
-{ pkgs, user, ... }:
+{
+  pkgs,
+  user,
+  ...
+}:
+
 {
   boot.kernelModules = [ "i2c-dev" ];
-  
+
   services.udev.packages = [
     (pkgs.writeTextFile {
       name = "i2c-rules";
@@ -12,7 +17,5 @@
     })
   ];
 
-  users.users.${user} = {
-    extraGroups = [ "i2c" ];
-  };
+  users.users.${user}.extraGroups = [ "i2c" ];
 }

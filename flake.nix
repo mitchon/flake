@@ -1,6 +1,10 @@
 {
   inputs = {
     nixpkgs.url = "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.zst";
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -24,49 +28,83 @@
   };
 
   outputs =
-    {
+    inputs@{
       self,
       nixpkgs,
+      disko,
       home-manager,
       ...
-    }@inputs:
+    }:
     let
-      system = "x86_64-linux";
-      stateVersion = "25.11";
-      user = "mitchanx";
-      hostname = "think-nix";
+      defaultSystem = "x86_64-linux";
+      defaultUser = "mitchanx";
+
+      mkSystem =
+        {
+          hostname,
+          modules,
+          system ? defaultSystem,
+          user ? defaultUser,
+        }:
+        nixpkgs.lib.nixosSystem {
+          inherit system modules;
+          specialArgs = { inherit inputs hostname user; };
+        };
+
+      bootstrap = mkSystem {
+        hostname = "nixos-bootstrap";
+        modules = [ ./images/bootstrap.nix ];
+      };
     in
     {
-      nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {
-        system = system;
-        specialArgs = { inherit inputs stateVersion hostname user; };
-        modules = [
-          ./hosts/${hostname}/nixos/configuration.nix
-        ];
+      nixosConfigurations = {
+        think-nix = mkSystem {
+          hostname = "think-nix";
+          modules = [
+            ./hosts/think-nix/nixos/configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                extraSpecialArgs = {
+                  inherit inputs;
+                  user = defaultUser;
+                };
+                users.${defaultUser} = import ./hosts/think-nix/home-manager/home.nix;
+              };
+            }
+          ];
+        };
+
+        homelab = mkSystem {
+          hostname = "homelab";
+          modules = [
+            disko.nixosModules.disko
+            ./hosts/homelab/default.nix
+          ];
+        };
+
+        nixos-bootstrap = bootstrap;
       };
 
-      homeConfigurations."${user}@${hostname}" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.${system};
-        extraSpecialArgs = { inherit inputs self stateVersion hostname user; };
-        modules = [ ./hosts/${hostname}/home-manager/home.nix ];
+      homeConfigurations."${defaultUser}@think-nix" = home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs {
+          system = defaultSystem;
+          config.allowUnfree = true;
+        };
+        extraSpecialArgs = {
+          inherit inputs;
+          user = defaultUser;
+        };
+        modules = [ ./hosts/think-nix/home-manager/home.nix ];
       };
 
-      # devShells.${system}.default = pkgs.mkShell {
-      #   nativeBuildInputs = with pkgs; [
-      #     corretto21
-      #     gradle
-      #     maven
-      #     jetbrains.idea
+      packages.${defaultSystem} = {
+        iso = bootstrap.config.system.build.isoImage;
+        default = self.packages.${defaultSystem}.iso;
+      };
 
-      #     telepresence
-      #     k9s
-
-      #     postman
-      #   ];
-      
-      #   shellHook = ''
-      #     export JAVA_HOME=${pkgs.corretto21}
-      #   '';
-      # };
+      formatter.${defaultSystem} = nixpkgs.legacyPackages.${defaultSystem}.nixfmt;
     };
 }

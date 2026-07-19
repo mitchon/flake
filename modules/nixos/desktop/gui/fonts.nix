@@ -1,10 +1,17 @@
-{ pkgs, inputs, ... }: let
+{
+  inputs,
+  pkgs,
+  ...
+}:
+
+let
   sf-pro = inputs.sf-pro.packages.${pkgs.stdenv.hostPlatform.system}.default;
-in {
+in
+{
   fonts.packages = with pkgs; [
-    noto-fonts
-    nerd-fonts.fira-code
     inter
+    nerd-fonts.fira-code
+    noto-fonts
     sf-pro
   ];
 }

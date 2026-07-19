@@ -1,25 +1,24 @@
-{ inputs, user, stateVersion, pkgs, ... }: {
+{
+  inputs,
+  pkgs,
+  user,
+  ...
+}:
+
+{
   imports = [
-    # inputs.nix-colors.homeManagerModule
-    # ./nvim.nix
     ./modules
   ];
-
-  nixpkgs = {
-    config = {
-      allowUnfree = true;
-    };
-  };
 
   home = {
     username = user;
     homeDirectory = "/home/${user}";
-    stateVersion = stateVersion;
+    stateVersion = "25.11";
     sessionVariables = {
       JAVA_HOME = pkgs.corretto21;
     };
   };
-  
+
   home.packages = with pkgs; [
     fastfetch
     telegram-desktop
