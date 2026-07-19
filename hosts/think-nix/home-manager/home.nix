@@ -51,9 +51,15 @@
     hunspellDicts.en-us
     hunspellDicts.ru-ru
     zoom-us
-    claude-code
+    codex
 
     chromium
     figma-linux
+
+    nicotine-plus
+    nocturne
+    vlc
+
+    nodejs_22
   ];
 }

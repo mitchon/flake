@@ -6,4 +6,6 @@
     dnsutils
     pciutils
   ];
+
+  programs.nix-ld.enable = true;
 }
