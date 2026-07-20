@@ -39,7 +39,7 @@ the public key in `keys/mitchanx-think-nix.pub`. It includes Git and disko.
 
 ## Homelab installation
 
-`hosts/homelab/disko.nix` **erases its target disk**. It defaults to `/dev/sda`.
+`hosts/homelab/nixos/disko.nix` **erases its target disk**. It defaults to `/dev/sda`.
 Confirm the device name with `lsblk` before running it, and override `device` in
 the module when necessary.
 
@@ -47,7 +47,7 @@ From an installer environment:
 
 ```console
 sudo nix run github:nix-community/disko -- \
-  --mode disko ./hosts/homelab/disko.nix
+  --mode disko ./hosts/homelab/nixos/disko.nix
 sudo nixos-install --flake .#homelab --root /mnt --no-root-passwd
 ```
 
@@ -57,7 +57,7 @@ has passwordless sudo because the account itself is key-only.
 
 The data disk mounted at `/mnt/hdd` is intentionally outside disko so a system
 reinstall cannot format it. Its UUID remains host-specific in
-`hosts/homelab/hardware-configuration.nix`.
+`hosts/homelab/nixos/hardware-configuration.nix`.
 
 ## Repository layout
 

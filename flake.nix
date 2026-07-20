@@ -93,7 +93,7 @@
           hostname = "homelab";
           modules = [
             disko.nixosModules.disko
-            ./hosts/homelab/default.nix
+            ./hosts/homelab/nixos/configuration.nix
           ];
         };
 

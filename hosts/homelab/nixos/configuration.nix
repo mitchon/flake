@@ -6,15 +6,11 @@
 
 {
   imports = [
-    ../../profiles/server.nix
+    ../../../profiles/server.nix
+    ./boot.nix
     ./disko.nix
     ./hardware-configuration.nix
   ];
-
-  boot.loader = {
-    systemd-boot.enable = true;
-    efi.canTouchEfiVariables = true;
-  };
 
   nix.settings.trusted-users = [ user ];
 
@@ -31,8 +27,8 @@
       group = user;
       hashedPassword = "!";
       openssh.authorizedKeys.keyFiles = [
-        ../../keys/mitchanx-think-nix.pub
-        ../../keys/nugget.pub
+        ../../../keys/mitchanx-think-nix.pub
+        ../../../keys/nugget.pub
       ];
     };
   };
