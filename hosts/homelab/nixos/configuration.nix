@@ -8,7 +8,7 @@
   imports = [
     ../../../profiles/server.nix
     ./boot.nix
-    ./disko.nix
+    ./disko-configuration.nix
     ./hardware-configuration.nix
   ];
 
