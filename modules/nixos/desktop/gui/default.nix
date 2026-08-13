@@ -20,5 +20,6 @@
     ddcutil
     playerctl
     wl-clipboard
+    udiskie
   ];
 }
