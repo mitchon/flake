@@ -11,5 +11,6 @@
     ./noctalia.nix
     ./foot.nix
     ./pinniped-cli.nix
+    ./ssh.nix
   ];
 }
