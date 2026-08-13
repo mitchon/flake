@@ -12,8 +12,6 @@
     ./hardware-configuration.nix
   ];
 
-  nix.settings.trusted-users = [ user ];
-
   networking = {
     hostName = hostname;
     networkmanager.enable = true;
