@@ -8,6 +8,7 @@
     ./niri.nix
     ./noctalia.nix
     ./ssh-askpass.nix
+    ./utils.nix
   ];
 
   services.power-profiles-daemon.enable = true;
@@ -21,5 +22,6 @@
     playerctl
     wl-clipboard
     udiskie
+    libsixel
   ];
 }

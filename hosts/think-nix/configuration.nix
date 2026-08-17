@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ../../../profiles/workstation.nix
+    ../../profiles/workstation.nix
     ./boot.nix
     ./hardware-configuration.nix
   ];

@@ -6,7 +6,7 @@
 
 {
   imports = [
-    ../../../profiles/server.nix
+    ../../profiles/server.nix
     ./boot.nix
     ./disko-configuration.nix
     ./hardware-configuration.nix
@@ -20,7 +20,6 @@
   users = {
     groups.${user}.gid = 1000;
     users.${user} = {
-      isNormalUser = true;
       uid = 1000;
       group = user;
       hashedPassword = "!";
