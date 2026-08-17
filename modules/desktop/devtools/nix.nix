@@ -4,4 +4,8 @@
     nil
     nixd
   ];
+
+  programs = {
+    nix-ld.enable = true;
+  };
 }
