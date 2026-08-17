@@ -1,9 +1,4 @@
-{
-  hostname,
-  user,
-  ...
-}:
-
+{ user, ... }:
 {
   imports = [
     ../../profiles/server.nix
@@ -11,11 +6,6 @@
     ./disko-configuration.nix
     ./hardware-configuration.nix
   ];
-
-  networking = {
-    hostName = hostname;
-    networkmanager.enable = true;
-  };
 
   users = {
     groups.${user}.gid = 1000;

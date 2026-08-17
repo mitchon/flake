@@ -1,8 +1,8 @@
 {
   imports = [
-    ../modules/nixos/common
-    ../modules/nixos/desktop
-    ../modules/nixos/services/docker.nix
-    ../modules/nixos/users/administrator.nix
+    ../modules/common
+    ../modules/desktop
+    ../modules/services/docker.nix
+    ../modules/users/administrator.nix
   ];
 }

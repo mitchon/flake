@@ -8,9 +8,7 @@ the same locked nixpkgs revision.
 
 | Output | Purpose |
 | --- | --- |
-| `nixosConfigurations.think-nix` | Workstation with its Home Manager configuration |
-| `homeConfigurations."mitchanx@think-nix"` | Optional standalone Home Manager activation |
-| `homeConfigurations.think-nix` | Short alias for the standalone Home Manager activation |
+| `nixosConfigurations.think-nix` | Workstation |
 | `nixosConfigurations.homelab` | Headless homelab server installed with disko |
 | `nixosConfigurations.nixos-bootstrap` | Configuration behind the bootstrap ISO |
 | `packages.x86_64-linux.iso` | Bootable bootstrap ISO |
@@ -65,10 +63,10 @@ reinstall cannot format it. Its UUID remains host-specific in
   decisions unique to a deployed machine.
 - `profiles/` composes reusable modules into complete workstation and server
   roles.
-- `modules/nixos/common/` contains baseline Nix, locale, and package policy.
-- `modules/nixos/users/` and `modules/nixos/services/` contain reusable account
+- `modules/common/` contains baseline Nix, locale, and package policy.
+- `modules/users/` and `modules/services/` contain reusable account
   and service capabilities.
-- `modules/nixos/desktop/` contains desktop capabilities independently of the
+- `modules/desktop/` contains desktop capabilities independently of the
   `think-nix` hardware.
 - `images/` contains image-only configuration.
 - `keys/` contains public SSH keys only; private keys and VPN credentials must

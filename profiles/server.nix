@@ -1,8 +1,8 @@
 {
   imports = [
-    ../modules/nixos/common
-    ../modules/nixos/services/docker.nix
-    ../modules/nixos/services/openssh.nix
-    ../modules/nixos/users/administrator.nix
+    ../modules/common
+    ../modules/services/docker.nix
+    ../modules/services/openssh.nix
+    ../modules/users/administrator.nix
   ];
 }
