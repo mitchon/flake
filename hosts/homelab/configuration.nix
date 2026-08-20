@@ -14,8 +14,8 @@
       group = user;
       hashedPassword = "!";
       openssh.authorizedKeys.keyFiles = [
-        ../../../keys/mitchanx-think-nix.pub
-        ../../../keys/nugget.pub
+        ../../keys/mitchanx-think-nix.pub
+        ../../keys/nugget.pub
       ];
     };
   };
