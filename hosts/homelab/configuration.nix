@@ -20,6 +20,21 @@
     };
   };
 
-  security.sudo.wheelNeedsPassword = false;
+  networking = {
+    useDHCP = false;
+    interfaces = {
+      eth0.ipv4.addresses = [{
+        address = "192.168.2.53";
+        prefixLength = 24;
+      }];
+      eth1.ipv4.addresses = [{
+        address = "192.168.2.54";
+        prefixLength = 24;
+      }];
+    };
+    defaultGateway = "192.168.2.1";
+    nameservers = [ "192.168.2.1" ];
+  };
+
   system.stateVersion = "25.11";
 }
