@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
     jetbrains.idea
@@ -10,5 +10,6 @@
     lazydocker
     lazysql
     postman
+    inputs.chatgpt.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 }

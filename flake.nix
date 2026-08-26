@@ -26,6 +26,10 @@
       url = "github:mitchon/sf-pro-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    chatgpt = {
+      url = "github:ilysenko/codex-desktop-linux";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, disko, ... }: 
