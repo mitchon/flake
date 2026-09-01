@@ -45,6 +45,8 @@
     settings.datasource_list = [ "NoCloud" ];
   };
 
+  services.qemuGuest.enable = true;
+
   services.getty.autologinUser = lib.mkForce "root";
   systemd.services.sshd = {
     wants = [ "network-online.target" ];
