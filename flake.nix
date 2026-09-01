@@ -10,6 +10,7 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-anywhere.url = "github:nix-community/nixos-anywhere/1.13.0";
     noctalia = {
       url = "github:noctalia-dev/noctalia/cachix";
       # inputs.nixpkgs.follows = "nixpkgs";
@@ -71,6 +72,7 @@
 
       packages.${defaultSystem} = {
         iso = bootstrap.config.system.build.isoImage;
+        nixos-anywhere = inputs.nixos-anywhere.packages.${defaultSystem}.default;
         default = self.packages.${defaultSystem}.iso;
       };
 

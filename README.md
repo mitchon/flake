@@ -12,6 +12,7 @@ the same locked nixpkgs revision.
 | `nixosConfigurations.homelab` | Headless homelab server installed with disko |
 | `nixosConfigurations.nixos-bootstrap` | Configuration behind the bootstrap ISO |
 | `packages.x86_64-linux.iso` | Bootable bootstrap ISO |
+| `packages.x86_64-linux.nixos-anywhere` | Pinned initial-installation tool |
 
 Inspect and check everything:
 
@@ -37,25 +38,40 @@ the public key in `keys/mitchanx-think-nix.pub`. It includes Git and disko.
 
 ## Homelab installation
 
-`hosts/homelab/nixos/disko.nix` **erases its target disk**. It defaults to `/dev/sda`.
+`hosts/homelab/disko-configuration.nix` **erases its target disk**. It defaults to `/dev/sda`.
 Confirm the device name with `lsblk` before running it, and override `device` in
 the module when necessary.
 
-From an installer environment:
+The Proxmox Terraform project performs the initial installation with the
+`nixos-anywhere` version pinned by this flake. The equivalent command is:
 
 ```console
-sudo nix run github:nix-community/disko -- \
-  --mode disko ./hosts/homelab/nixos/disko.nix
-sudo nixos-install --flake .#homelab --root /mnt --no-root-passwd
+nix --accept-flake-config run .#nixos-anywhere -- \
+  --flake .#homelab \
+  --target-host root@192.168.2.53 \
+  --build-on local \
+  --copy-host-keys \
+  --print-build-logs \
+  --option accept-flake-config true \
+  -i ~/.ssh/id_ed25519
 ```
 
-The configuration uses an 8 GiB swap partition instead of the previous
-manually-created swap file. SSH password login is disabled. The `mitchanx` user
-has passwordless sudo because the account itself is key-only.
+After installation, deploy normal configuration changes without repartitioning:
+
+```console
+nixos-rebuild switch \
+  --flake .#homelab \
+  --target-host mitchanx@192.168.2.53 \
+  --sudo \
+  --use-substitutes
+```
+
+The configuration uses a 4 GiB swap file. SSH password login is disabled. The
+`mitchanx` user has passwordless sudo because the account itself is key-only.
 
 The data disk mounted at `/mnt/hdd` is intentionally outside disko so a system
 reinstall cannot format it. Its UUID remains host-specific in
-`hosts/homelab/nixos/hardware-configuration.nix`.
+`hosts/homelab/hardware-configuration.nix`.
 
 ## Repository layout
 
