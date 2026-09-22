@@ -23,5 +23,7 @@
     zoom-us
     figma-linux
     telegram-desktop
+
+    freecad
   ];
 }
